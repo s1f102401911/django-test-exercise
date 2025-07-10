@@ -109,3 +109,24 @@ class TodoViewTestCase(TestCase):
         client = Client()
         response = client.get("/1/")
         self.assertEqual(response.status_code, 404)
+
+    def test_delete(self):
+        task = Task(title="task1", due_at=timezone.make_aware(datetime(2024, 7, 1)))
+        task.save()
+        task.delete()
+        tasks = Task.objects.all()
+        self.assertEqual(tasks.count(), 0)
+
+    def test_update(self):
+        task = Task(title="task1", due_at=timezone.make_aware(datetime(2024, 7, 1)))
+        task.save()
+        client = Client()
+        response = client.get("/{}/update".format(task.pk))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.templates[0].name, "todo/edit.html")
+        self.assertEqual(response.context["task"], task)
+        task.title = "taskedit"
+        task.due_at = timezone.make_aware(datetime(2025, 1, 1))
+        task.save()
+        response = client.get("/")
+        self.assertEqual(response.context["tasks"][0], task)

@@ -62,7 +62,6 @@ div a:last-child {
     margin-right: 0;
 }
 
-/* 特定のリンクの色を変更 (例: 削除ボタンを赤に) */
 a[href*="delete"] {
     background-color: #e74c3c;
 }
@@ -71,8 +70,7 @@ a[href*="delete"]:hover {
     background-color: #c0392b;
 }
 
-/* 完了ステータスのリストアイテムのスタイル */
 ul li:has(span.completed-status) {
-    background-color: #e6ffe6; /* 薄い緑の背景 */
-    border-left-color: #28a745; /* 完了の緑 */
+    background-color: #e6ffe6;
+    border-left-color: #28a745;
 }

@@ -1,0 +1,23 @@
+body{
+    background-color: bisque; 
+}
+h1{
+    color: red;
+    text-decoration: underline;
+    font-family: serif;
+    font-size: 20;
+    text-shadow: 5px 5px 2px #bc5757;
+    text-align: center;
+}
+p{
+    border-bottom: 1px solid black;
+    font-family: serif;
+}
+label{
+    font-family: serif;
+    text-decoration: underline ;
+}
+div{
+    font-family: serif;
+}
+

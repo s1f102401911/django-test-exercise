@@ -130,3 +130,15 @@ class TodoViewTestCase(TestCase):
         task.save()
         response = client.get("/")
         self.assertEqual(response.context["tasks"][0], task)
+
+    def test_close(self):
+        task = Task(title="task1", due_at=timezone.make_aware(datetime(2024, 7, 1)))
+        task.save()
+        client = Client()
+        response = client.get("/{}/close".format(task.pk))
+        self.assertEqual(response.status_code, 302)
+    
+    def test_close_get_fail(self):
+        client = Client()
+        response = client.get("/1/close")
+        self.assertEqual(response.status_code, 404)
